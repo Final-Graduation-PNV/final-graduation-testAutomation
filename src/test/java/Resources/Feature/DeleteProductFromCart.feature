@@ -1,4 +1,4 @@
-Feature: Test Add To Cart function
+Feature: Test Delete product from cart function
   Scenario: User Add To Cart successfully
     Given user login successfully
     And click on addtocart button
