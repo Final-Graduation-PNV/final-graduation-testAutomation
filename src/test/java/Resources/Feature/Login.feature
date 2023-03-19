@@ -9,7 +9,7 @@ Feature: Test login function
     Then <message> is displayed
     Examples:
       | email               | password                                            | message                                                                    |
-      | duyetho21@gmail.com | D210902@m                                           | Congratulations                                                            |
+      | duyetho21@gmail.com | D21092002@m                                         | Login successfully                                                         |
       | duyetho21@gmail.    | D210902@m                                           | Invalid format, please enter again!                                        |
       | duyetho21@          | D210902@m                                           | Invalid format, please enter again!                                        |
       | duyetho21gmail.com  | D210902@m                                           | Invalid format, please enter again!                                        |
@@ -21,6 +21,7 @@ Feature: Test login function
       | duyetho21@gmail.com | 123456->>                                           | Enter required input for password filed                                    |
       | duyetho21@gmail.com | @#*_______                                          | Password must contain uppercase,lowercase, number, abnd special characters |
       | duyetho21@gmail.com | D210902@m                                           | Email already exists                                                       |
+
 
 
 

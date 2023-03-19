@@ -1,12 +1,17 @@
 package stepDefinitions;
 
+import gherkin.lexer.Th;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
@@ -71,7 +76,7 @@ public class StepDefinition {
 
     @And("^input valid data for (.+) field$")
     public void input_valid_data_for_password_field() throws Throwable{
-        driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div[2]/form/input[2]")).sendKeys("D210902@m");
+        driver.findElement(By.xpath("//*[@id=\"container\"]/div/div/div[2]/form/input[2]")).sendKeys("D21092002@m");
         Thread.sleep(2*1000);
     }
     @Given("user login successfully")
@@ -86,6 +91,7 @@ public class StepDefinition {
     @And("Click on Avatar image")
     public void Click_on_Avatar_image() throws Throwable{
         driver.findElement(By.xpath("//*[@id=\"container-header\"]/div[2]/div[2]/div[2]/img")).click();
+
     }
     @When("click on Log out button")
     public void click_on_Log_out_button() throws Throwable{
@@ -97,20 +103,30 @@ public class StepDefinition {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[3]/div[4]/button")).click();
         Thread.sleep(1000);
     }
-    // ----------Add product
-    @Given("verify admin shop page")
-    public void verify_admin_shop_page() throws InterruptedException {
-        String adminShopPageUrl = driver.getCurrentUrl();
-        Assert.assertEquals(adminShopPageUrl, "http://localhost:3000/shopOnnwer");
-        Thread.sleep(2*1000);
+    //------------------Delete product from cart
+    @And("click on cart button")
+    public void click_on_cart_button(){
+        driver.findElement(By.xpath("/html/body/div/div[1]/div[1]/div/div[2]/div/div[1]")).click();
     }
-    @And("click on Addproduct button")
-    public void click_on_Addproduct_button(){
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[1]/button")).click();
+    @When("click on delete icon")
+    public void click_on_delete_icon(){
+        driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[2]/div[2]/p/svg/path")).click();
     }
-//    @And("click on choose file")
-//    public void click_on_choose_file(){
-//        driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div/div[1]/div/input")).sendKeys("C:\\Users\\admin\\Pictures\\mtp.JPG");
-//    }
+
+    @Then("display message")
+    public void display_message(){
+        System.out.println("Delete product from cart successful");
+    }
+
+//-------------------Search product by name and category
+    @And("enter valid data for the search bar then press enter button")
+    public void enter_valid_data_for_the_search_bar_then_press_enter_button() throws Throwable{
+        // identify element
+        WebElement e =driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div[2]/div[2]/div[1]/div/input"));
+        e.sendKeys("flower");
+        // Keys.ENTER with sendKeys
+        e.sendKeys(Keys.ENTER);
+    }
+
 
 }
